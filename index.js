@@ -2,9 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const sqlite3 = require('sqlite3').verbose();
+const config = require('config');
+
+const directoryPath = config.get('filepath');
+const token = config.get('token');
+
 
 const app = express();
-const directoryPath = "path-to-server-folder"
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,7 +34,7 @@ const auth = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
       const token = authHeader.split(' ')[1];
-      const adminPassword = 'token'; // Change this to your desired password
+      const adminPassword = token;
   
       if (token === adminPassword) {
         return next(); // Authentication successful, proceed to next middleware
