@@ -33,10 +33,10 @@ const db = new sqlite3.Database('whitelist.db', (err) => {
 const auth = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
-      const token = authHeader.split(' ')[1];
+      const userToken = authHeader.split(' ')[1];
       const adminPassword = token;
   
-      if (token === adminPassword) {
+      if (userToken === adminPassword) {
         return next(); // Authentication successful, proceed to next middleware
       }
     }
