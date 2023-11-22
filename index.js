@@ -34,6 +34,7 @@ const auth = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
       const userToken = authHeader.split(' ')[1];
+      console.log(userToken)
       const adminPassword = token;
   
       if (userToken === adminPassword) {
